@@ -4,6 +4,8 @@ html, body {
 }
 
 #root {
-  background-image: url("./images/Caffettin.gif");
+  background-image: url("./images/rect3717.png");
+  background-size: cover;
+  background-repeat: round;
   height: 100%;
 }
