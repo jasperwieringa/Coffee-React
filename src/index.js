@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css'
 import SweetCoffee from './Components/SweetCoffee';
 import * as serviceWorker from './serviceWorker';
 

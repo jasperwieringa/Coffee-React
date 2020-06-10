@@ -1,0 +1,9 @@
+html, body {
+  height: 800px;
+  width: 1280px;
+}
+
+#root {
+  background-image: url("./images/Caffettin.gif");
+  height: 100%;
+}
