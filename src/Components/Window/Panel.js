@@ -21,6 +21,8 @@ export default function Panel(props) {
     `
   }
 
+  console.log("I am being rendered");
+
   return (
     <React.Fragment>
       <Row className={`mx-1 mt-3 ${styles.buttons}`}>
