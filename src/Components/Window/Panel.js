@@ -24,7 +24,7 @@ export default function Panel(props) {
   return (
     <React.Fragment>
       <Row className={`mx-1 mt-3 ${styles.buttons}`}>
-        {(props.types).map((value, index) => {
+        {(props.drinkTypes).map((value, index) => {
           return(
             <Col xs={4} key={index} className="mb-1">
               <CoffeeButton key={value.id} name={value.name} prepareDrink={props.prepareDrink}/>

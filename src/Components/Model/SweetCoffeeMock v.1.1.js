@@ -12,10 +12,10 @@
 class SweetCoffeeMachine {
 	constructor() {
 	  this.stock = {
-		milk: 10,
-		chocolate: 10,
-		sugar: 10,
-	  };
+			milk: 10,
+			chocolate: 10,
+			sugar: 10,
+		};
 	}
 
 	makeAmericano(sugar, milk) {
@@ -42,12 +42,8 @@ class SweetCoffeeMachine {
 		return ("make TeaEarlgray");
 	}
 
-	/**
-	 * Om ervoor te zorgen dat de frontend goed kan anticiperen op tekorten, kan er ook doormiddel van
-	 * getStock een request gedaan worden om de beginwaardes (initialisatie) van de machine op te vragen
-	 */
 	getStock() {
-		return;
+		return this.stock;
 	}
 }
 
