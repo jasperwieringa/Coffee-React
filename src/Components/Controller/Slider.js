@@ -7,6 +7,7 @@ export default function Status(props) {
 
   const handleValue = (e) => {
     setValue(e.target.value)
+    props.handleValue(props.type, e.target.value);
   }
 
   return (

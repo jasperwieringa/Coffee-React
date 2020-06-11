@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 
 import Row from 'react-bootstrap/Row';
@@ -13,8 +13,7 @@ import SweetCoffeeMachine from '../Model/SweetCoffeeMock v.1.1';
 export default function Panel(props) { 
   const coffeeMachine = new SweetCoffeeMachine();  
   const [stock, setStock] = useState(coffeeMachine.getStock());
-  const [sugar, setSugar] = useState(0);
-  const [milk, setMilk] = useState(0);
+  const [[sugar, milk], setValues] = useState([0, 0]);
 
   const styles = {
     buttons: css`
@@ -25,13 +24,24 @@ export default function Panel(props) {
     `
   }
 
-  const handleRequirements = (type, value) => {
-    type === "sugar" 
-      ? setSugar(value)
-      : setMilk(value);
+  const handleValues = (type, value) => {
+    setValues(prevValues => {
+      const newValue = type === "sugar" 
+        ? [Number(value), prevValues[1]] 
+        : [prevValues[0], Number(value)]
+      return (newValue);
+    })
   };
 
-  console.log("I am being rendered")
+  const handleDrink = (type) => {
+    const error = true
+    const msg = "Something went wrong"
+    props.handleDrink(type, error, msg);
+  }
+
+  const handleStock = (type, value) => {
+    setStock({[type]: value})
+  }
 
   return (
     <React.Fragment>
@@ -39,17 +49,17 @@ export default function Panel(props) {
         {(drinkTypes).map((value, index) => {
           return(
             <Col xs={4} key={index} className="mb-1">
-              <CoffeeButton key={value.id} name={value.name} milk={milk} sugar={sugar} handleDrink={props.handleDrink}/>
+              <CoffeeButton key={value.id} name={value.name} milk={milk} sugar={sugar} handleDrink={handleDrink}/>
             </Col>
           )
         })}
       </Row>
       <Row className={`mx-1 row d-flex align-content-center ${styles.sliders}`}>
         <Col xs={6}>
-          <Slider name="Suiker" type="sugar" stock={stock.sugar} handleRequirements={handleRequirements} />
+          <Slider name="Suiker" type="sugar" stock={stock.sugar} handleValue={handleValues} />
         </Col>
         <Col xs={6}>
-          <Slider name="Melk" type="milk" stock={stock.milk} handleRequirements={handleRequirements} />
+          <Slider name="Melk" type="milk" stock={stock.milk} handleValue={handleValues} />
         </Col>
       </Row>
     </React.Fragment>
