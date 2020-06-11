@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 export default function Error(props) {
   function handleError() {
     /* De callback function vanuit SweetCoffee verwacht een String met de foutmelding en een Boolean of er een fout is */
-    props.cb("Reset", false);
+    props.handleError("Reset", false);
   };
 
   return (

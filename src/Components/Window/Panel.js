@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
@@ -9,26 +8,7 @@ import CoffeeButton from '../Controller/CoffeeButton';
 import Slider from '../Controller/Slider';
 import Status from '../Controller/Status';
 
-export default function Panel(props) {
-  const styles = {
-    container: css`
-      position: absolute;
-      bottom: 5.5em;
-      right: 6em;
-      height: 24em;
-      width: 31em;
-    `,
-    buttons: css`
-      height: 70%;
-    `,
-    sliders: css`
-      height: 20%;
-    `,
-    status: css`
-      height: 10%;
-    `
-  };
-
+export default function Panel(props) {  
   const drinkTypes = [{
     name: "Americano",
     id: "ac"
@@ -49,13 +29,25 @@ export default function Panel(props) {
     id: "eg"
   }];
 
+  const styles = {
+    buttons: css`
+      height: 70%;
+    `,
+    sliders: css`
+      height: 20%;
+    `,
+    status: css`
+      height: 10%;
+    `
+  }
+
   return (
-    <Container fluid className={styles.container}>
+    <React.Fragment>
       <Row className={styles.buttons}>
-        {drinkTypes.map(drink => {
+        {drinkTypes.map((value, index) => {
           return(
-            <Col xs={4} className="mb-1">
-              <CoffeeButton key={drink.id} name={drink.name} disabled={props.busy} cb={props.cb}/>
+            <Col xs={4} key={index} className="mb-1">
+              <CoffeeButton key={value.id} name={value.name} disabled={props.busy} prepareDrink={props.prepareDrink}/>
             </Col>
           )
         })}
@@ -73,6 +65,6 @@ export default function Panel(props) {
           <Status />
         </Col>
       </Row>
-    </Container>
+    </React.Fragment>
   );
 }
