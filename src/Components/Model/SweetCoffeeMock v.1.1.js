@@ -4,11 +4,12 @@
  * van functies aan te passen, zolang de interface van het mock object identiek blijft.
  */
 
+/**
+ * Wanneer de machine wordt aangezet mag je ervanuit gaan dat alle voorraden volledig aangevuld zijn
+ * De waardes in de constructor zijn daarom altijd de voorraadwaardes bij initialisatie
+*/
+
 class SweetCoffeeMachine {
-	/**
-	 * Wanneer de machine wordt aangezet mag je ervanuit gaan dat alle voorraden volledig aangevuld zijn
-	 * De waardes in de constructor zijn daarom altijd de voorraadwaardes bij initialisatie
-	 */
 	constructor() {
 	  this.stock = {
 		milk: 10,
@@ -18,27 +19,27 @@ class SweetCoffeeMachine {
 	}
 
 	makeAmericano(sugar, milk) {
-		return;
+		return ("make Americano");
 	}
 
 	makeCappuchino(sugar, milk) {
-		return;
+		return ("make Cappuchino");
 	}
 
 	makeWienermelange(sugar, milk) {
-		return;
+		return ("make Wienermelange");
 	}
 
 	makeChoco(sugar, milk) {
-		return;
+		return ("make Choco");
 	}
 
 	makeTeaBlack(sugar, milk) {
-		return;
+		return ("make TeaBlack");
 	}
 
 	makeTeaEarlgray(sugar, milk) {
-		return;
+		return ("make TeaEarlgray");
 	}
 
 	/**

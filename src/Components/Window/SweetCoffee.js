@@ -1,26 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import Error from './Error'
 import Panel from './Panel'
 
 import Container from 'react-bootstrap/Container';
 
-function SweetCoffee() {
+export default function SweetCoffee() {
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("Onbekende fout")
+  const [errorMessage, setErrorMessage] = useState("")
 
-  const cb = useCallback((msg, error) => {
+  const handleError = (msg, error) => {
     setIsError(error)
     setErrorMessage(msg);
-  }, [])
+  }
 
   return (
     <Container fluid className="h-100 py-3 position-relative">
       { isError 
-        ? <Error cb={cb} error={errorMessage} /> 
-        : <Panel cb={cb} /> }
+        ? <Error cb={handleError} error={errorMessage} /> 
+        : <Panel cb={handleError} /> }
     </Container>
   );
 }
-
-export default SweetCoffee;

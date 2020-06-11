@@ -3,9 +3,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-function Error(props) {
-
-  function resetError() {
+export default function Error(props) {
+  function handleError() {
+    /* De callback function vanuit SweetCoffee verwacht een String met de foutmelding en een Boolean of er een fout is */
     props.cb("Reset", false);
   }
 
@@ -20,10 +20,8 @@ function Error(props) {
         </div>
       </Card.Body>
       <Card.Footer className="text-muted">
-        <Button variant="primary" className="float-right" onClick={e => resetError()}>Reset</Button>
+        <Button variant="primary" className="float-right" onClick={e => handleError()}>Reset</Button>
       </Card.Footer>
     </Card>
   );
 }
-
-export default Error;

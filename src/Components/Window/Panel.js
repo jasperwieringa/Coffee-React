@@ -2,9 +2,9 @@ import React from 'react';
 import { css } from 'emotion';
 
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
+import CoffeeButton from '../Controller/CoffeeButton';
 
-function Panel(props) {
+export default function Panel(props) {
   const styles = {
     container: css`
       position: absolute;
@@ -15,19 +15,12 @@ function Panel(props) {
     `,
   }
 
-  function setError() {
-    // De callback function vanuit SweetCoffee verwacht een String met de foutmelding
-    // en een Boolean of er een fout is true/false
-    props.cb("Error message", true);
-  }
-
   return (
     <Container fluid className={styles.container}>
-    
-      <Button onClick={e => setError()}>Click me!</Button>
-
+      <CoffeeButton cb={props.cb} />
+      <CoffeeButton cb={props.cb} />
+      <CoffeeButton cb={props.cb} />
+      <CoffeeButton cb={props.cb} />
     </Container>
   );
 }
-
-export default Panel;
