@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container';
 
 export default function SweetCoffee() {
   const [isBusy, setIsBusy] = useState(false);
+  const [drinkType, setDrinkType] = useState("Cappucino");
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -22,18 +23,19 @@ export default function SweetCoffee() {
     `
   };
   
-  const handleDrink = (msg, error) => {
+  const handleDrink = (drinkType, msg, error) => {
     setIsBusy(true);
 
     if (error) {
       handleError(msg, error)
+    } else {
+      setDrinkType(drinkType);
+
+      const timer = setTimeout(() => {
+        setIsBusy(false)
+      }, 4000);
+      return () => clearTimeout(timer);
     }
-    // } else {
-    //   const timer = setTimeout(() => {
-    //     setIsBusy(false)
-    //   }, 3000);
-    //   return () => clearTimeout(timer);
-    // }
   }
 
   const handleError = (msg, error) => {
@@ -49,7 +51,7 @@ export default function SweetCoffee() {
         : 
         <Container fluid className={`position-absolute px-0 ${styles.container}`}>
           {isBusy
-            ? <Loader />
+            ? <Loader drinkType={drinkType} />
             : <Panel types={drinkTypes} prepareDrink={handleDrink} />
           }
         </Container>
