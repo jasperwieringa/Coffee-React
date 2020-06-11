@@ -7,9 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <SweetCoffee />
-  </React.StrictMode>,
+  <SweetCoffee />,
   document.getElementById('root')
 );
 
