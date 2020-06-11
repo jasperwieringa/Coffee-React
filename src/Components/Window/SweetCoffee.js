@@ -9,7 +9,6 @@ import drinkTypes from '../../drinkTypes.json';
 import Container from 'react-bootstrap/Container';
 
 export default function SweetCoffee() {
-  const [stock, setStock] = useState(0);
   const [isBusy, setIsBusy] = useState(false);
   const [drinkType, setDrinkType] = useState("");
   const [isError, setIsError] = useState(false);
@@ -53,7 +52,7 @@ export default function SweetCoffee() {
         <Container fluid className={`position-absolute px-0 ${styles.container}`}>
           {isBusy
             ? <Loader drinkType={drinkType} />
-            : <Panel currentStock={stock} drinkTypes={drinkTypes} prepareDrink={handleDrink} />
+            : <Panel drinkTypes={drinkTypes} handleDrink={handleDrink} />
           }
         </Container>
       }

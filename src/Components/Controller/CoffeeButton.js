@@ -6,7 +6,7 @@ export default function CoffeeButton(props) {
   function handleDrink() {
     /* De callback function vanuit SweetCoffee verwacht een String met de foutmelding en een Boolean of er een fout is */
     // props.cb("Error message", true);
-    props.prepareDrink(props.name);
+    props.handleDrink(props.name);
   };
 
   return (
