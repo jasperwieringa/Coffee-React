@@ -8,6 +8,6 @@ export default function CoffeeButton(props) {
       variant="secondary" 
       className="h-100 w-100 rounded-0" 
       disabled={props.disabled} 
-      onClick={() => props.handleDrink(props.name)}>{props.name}</Button>
+      onClick={() => props.handleDrink(props.data.name)}>{props.data.name}</Button>
   )
 }

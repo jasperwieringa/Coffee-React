@@ -23,13 +23,13 @@ export default function SweetCoffee() {
     `
   };
 
-  const handleDrink = (type, error, msg) => {
+  const handleDrink = (name, error, msg) => {
     setIsBusy(true);
 
     if (error) {
       handleError(error, msg)
     } else {
-      setDrinkType(type);
+      setDrinkType(name);
 
       const timer = setTimeout(() => {
         setIsBusy(false)

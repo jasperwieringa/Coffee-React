@@ -1,14 +1,3 @@
-/**
- * Het doel van dit object is het bieden van een interface naar de koffiezetmachine. Er zijn al methodes (gedrag)
- * geimplementeerd die de basis vormen voor jouw implementatie. Voel je vrij functies toe te voegen en het gedrag
- * van functies aan te passen, zolang de interface van het mock object identiek blijft.
- */
-
-/**
- * Wanneer de machine wordt aangezet mag je ervanuit gaan dat alle voorraden volledig aangevuld zijn
- * De waardes in de constructor zijn daarom altijd de voorraadwaardes bij initialisatie
-*/
-
 class SweetCoffeeMachine {
 	constructor() {
 	  this.stock = {
@@ -18,32 +7,39 @@ class SweetCoffeeMachine {
 		};
 	}
 
-	makeAmericano(sugar, milk) {
-		return ("make Americano");
+	makeAmericano (stock, reqSugar, reqMilk) {
+		this.checkStock(stock, reqSugar, reqMilk)
 	}
 
-	makeCappuchino(sugar, milk) {
-		return ("make Cappuchino");
+	makeCappuchino(reqSugar, reqMilk) {
 	}
 
-	makeWienermelange(sugar, milk) {
-		return ("make Wienermelange");
+	makeWienermelange(reqSugar, reqMilk) {
 	}
 
-	makeChoco(sugar, milk) {
-		return ("make Choco");
+	makeChoco(reqSugar, reqMilk) {
 	}
 
-	makeTeaBlack(sugar, milk) {
-		return ("make TeaBlack");
+	makeTeaBlack(reqSugar, reqMilk) {
 	}
 
-	makeTeaEarlgray(sugar, milk) {
-		return ("make TeaEarlgray");
+	makeTeaEarlgray(reqSugar, reqMilk) {
 	}
 
 	getStock() {
 		return this.stock;
+	}
+	
+	 // checkStock returned true of false
+	checkStock = (stock, reqSugar, reqMilk) => {
+		reqSugar = Math.floor(reqSugar / 10);
+		reqMilk = Math.floor(reqMilk / 10);
+
+		if (reqSugar <= stock.sugar && reqMilk <= stock.milk) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 
