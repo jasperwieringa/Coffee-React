@@ -5,12 +5,14 @@ import Button from 'react-bootstrap/Button';
 // import SweetCoffeeMachine from '../Model/SweetCoffeeMock v.1.1';
 
 export default function CoffeeButton(props) {
+  console.log(props);
+
   function handleError() {
     /* De callback function vanuit SweetCoffee verwacht een String met de foutmelding en een Boolean of er een fout is */
     props.cb("Error message", true);
   }
 
   return (
-    <Button variant="primary" onClick={e => handleError()}>Click me!</Button>
+    <Button variant="secondary" onClick={e => handleError()}>{props.name}</Button>
   )
 }

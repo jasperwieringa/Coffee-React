@@ -15,12 +15,36 @@ export default function Panel(props) {
     `,
   }
 
+  const drinkTypes = [{
+    name: "Americano",
+    id: "ac"
+  }, 
+  {
+    name: "Cappucino",
+    id: "cc"
+  },
+  {
+    name: "Wiener Melange",
+    id: "wm"
+  },
+  {
+    name: "Chocolade",
+    id: "c"
+  },
+  {
+    name: "Zwarte thee",
+    id: "zt"
+  },
+  {
+    name: "Earl Gray",
+    id: "eg"
+  }]
+
   return (
     <Container fluid className={styles.container}>
-      <CoffeeButton cb={props.cb} />
-      <CoffeeButton cb={props.cb} />
-      <CoffeeButton cb={props.cb} />
-      <CoffeeButton cb={props.cb} />
+      {drinkTypes.map(drink => {
+        return(<CoffeeButton key={drink.id} name={drink.name}/>)
+      })}
     </Container>
   );
 }
