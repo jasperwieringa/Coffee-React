@@ -9,15 +9,15 @@ function SweetCoffee() {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Onbekende fout")
 
-  const cb = useCallback(msg => {
-    setIsError(true)
+  const cb = useCallback((msg, error) => {
+    setIsError(error)
     setErrorMessage(msg);
-  }, [isError])
+  }, [])
 
   return (
     <Container fluid className="h-100 py-3 position-relative">
       { isError 
-        ? <Error error={errorMessage} /> 
+        ? <Error cb={cb} error={errorMessage} /> 
         : <Panel cb={cb} /> }
     </Container>
   );
