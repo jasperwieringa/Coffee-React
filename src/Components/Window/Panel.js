@@ -27,7 +27,7 @@ export default function Panel(props) {
     status: css`
       height: 10%;
     `
-  }
+  };
 
   const drinkTypes = [{
     name: "Americano",
@@ -47,7 +47,7 @@ export default function Panel(props) {
   },{
     name: "Earl Gray",
     id: "eg"
-  }]
+  }];
 
   return (
     <Container fluid className={styles.container}>
@@ -55,17 +55,17 @@ export default function Panel(props) {
         {drinkTypes.map(drink => {
           return(
             <Col xs={4} className="mb-1">
-              <CoffeeButton key={drink.id} name={drink.name} cb={props.cb}/>
+              <CoffeeButton key={drink.id} name={drink.name} disabled={props.busy} cb={props.cb}/>
             </Col>
           )
         })}
       </Row>
       <Row className={`pt-2 ${styles.sliders}`}>
         <Col xs={6}>
-          <Slider name="Suiker" />
+          <Slider name="Suiker" percentage="50%" />
         </Col>
         <Col xs={6}>
-          <Slider name="Melk" />
+          <Slider name="Melk" percentage="20%" />
         </Col>
       </Row>
       <Row className={styles.status}>

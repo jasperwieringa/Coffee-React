@@ -7,7 +7,7 @@ export default function Error(props) {
   function handleError() {
     /* De callback function vanuit SweetCoffee verwacht een String met de foutmelding en een Boolean of er een fout is */
     props.cb("Reset", false);
-  }
+  };
 
   return (
     <Card bg="danger" className="text-center text-white h-100">
