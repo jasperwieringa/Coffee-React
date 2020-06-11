@@ -13,8 +13,8 @@ import SweetCoffeeMachine from '../Model/SweetCoffeeMock v.1.1';
 export default function Panel(props) { 
   const coffeeMachine = new SweetCoffeeMachine();  
   const [stock, setStock] = useState(coffeeMachine.getStock());
-  const [sugar, setSugar] = useState("");
-  const [milk, setMilk] = useState("");
+  const [sugar, setSugar] = useState(0);
+  const [milk, setMilk] = useState(0);
 
   const styles = {
     buttons: css`
