@@ -34,8 +34,8 @@ export default function Panel(props) {
   };
 
   const handleDrink = (type) => {
-    const error = true
-    const msg = "Something went wrong"
+    const error = false;
+    const msg = "Something went wrong";
     props.handleDrink(type, error, msg);
   }
 
