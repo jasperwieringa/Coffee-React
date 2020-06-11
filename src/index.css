@@ -1,11 +1,11 @@
-html, body {
+html, body, #root {
   height: 800px;
   width: 1280px;
+  
 }
 
 #root {
   background-image: url("./images/rect3717.png");
   background-size: cover;
   background-repeat: round;
-  height: 100%;
 }

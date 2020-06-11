@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'
-import SweetCoffee from './Components/SweetCoffee';
+import SweetCoffee from './Components/Window/SweetCoffee';
 import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
