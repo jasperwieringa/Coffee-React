@@ -8,27 +8,7 @@ import CoffeeButton from '../Controller/CoffeeButton';
 import Slider from '../Controller/Slider';
 import Status from '../Controller/Status';
 
-export default function Panel(props) {  
-  const drinkTypes = [{
-    name: "Americano",
-    id: "ac"
-  }, {
-    name: "Cappucino",
-    id: "cpc"
-  },{
-    name: "Wiener Melange",
-    id: "wm"
-  },{
-    name: "Chocolade",
-    id: "cc"
-  },{
-    name: "Zwarte thee",
-    id: "zt"
-  },{
-    name: "Earl Gray",
-    id: "eg"
-  }];
-
+export default function Panel(props) {    
   const styles = {
     buttons: css`
       height: 70%;
@@ -43,16 +23,16 @@ export default function Panel(props) {
 
   return (
     <React.Fragment>
-      <Row className={styles.buttons}>
-        {drinkTypes.map((value, index) => {
+      <Row className={`mx-1 mt-3 ${styles.buttons}`}>
+        {(props.types).map((value, index) => {
           return(
             <Col xs={4} key={index} className="mb-1">
-              <CoffeeButton key={value.id} name={value.name} disabled={props.busy} prepareDrink={props.prepareDrink}/>
+              <CoffeeButton key={value.id} name={value.name} prepareDrink={props.prepareDrink}/>
             </Col>
           )
         })}
       </Row>
-      <Row className={`pt-2 ${styles.sliders}`}>
+      <Row className={`mx-1 pt-2 ${styles.sliders}`}>
         <Col xs={6}>
           <Slider name="Suiker" percentage="50%" />
         </Col>
@@ -60,7 +40,7 @@ export default function Panel(props) {
           <Slider name="Melk" percentage="20%" />
         </Col>
       </Row>
-      <Row className={styles.status}>
+      <Row className={`mx-1 ${styles.status}`}>
         <Col xs={12} className="d-flex justify-content-center">
           <Status />
         </Col>

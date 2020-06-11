@@ -1,0 +1,24 @@
+[{
+  "name": "Americano",
+  "id": "ac"
+}, 
+{
+  "name": "Cappucino",
+  "id": "cpc"
+},
+{
+  "name": "Wiener Melange",
+  "id": "wm"
+},
+{
+  "name": "Chocolade",
+  "id": "cc"
+},
+{
+  "name": "Zwarte thee",
+  "id": "zt"
+},
+{
+  "name": "Earl Gray",
+  "id": "eg"
+}]

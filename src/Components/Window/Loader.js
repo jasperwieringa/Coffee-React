@@ -1,11 +1,10 @@
 import React from 'react';
 
-import Spinner from 'react-bootstrap/Spinner';
+import Image from 'react-bootstrap/Image'
+import alaminxyz from '../../images/alaminxyz.gif';
 
 export default function Loader() {
   return (
-    <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-    </Spinner>
+    <Image className="w-100 h-100" src={alaminxyz}/>
   )
 }

@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import Error from './Error';
 import Panel from './Panel';
 import Loader from './Loader';
+import drinkTypes from '../../drinkTypes.json';
 
 import Container from 'react-bootstrap/Container';
 
@@ -14,11 +15,10 @@ export default function SweetCoffee() {
 
   const styles = {
     container: css`
-      position: absolute;
-      bottom: 5.5em;
-      right: 6em;
-      height: 24em;
-      width: 31em;
+      bottom: 4.8em;
+      right: 5.2em;
+      height: 25.6em;
+      width: 32.6em;
     `
   };
   
@@ -27,12 +27,13 @@ export default function SweetCoffee() {
 
     if (error) {
       handleError(msg, error)
-    } else {
-      const timer = setTimeout(() => {
-        setIsBusy(false)
-      }, 3000);
-      return () => clearTimeout(timer);
     }
+    // } else {
+    //   const timer = setTimeout(() => {
+    //     setIsBusy(false)
+    //   }, 3000);
+    //   return () => clearTimeout(timer);
+    // }
   }
 
   const handleError = (msg, error) => {
@@ -46,10 +47,10 @@ export default function SweetCoffee() {
       {isError 
         ? <Error handleError={handleError} error={errorMessage} /> 
         : 
-        <Container fluid className={styles.container}>
+        <Container fluid className={`position-absolute px-0 ${styles.container}`}>
           {isBusy
             ? <Loader />
-            : <Panel prepareDrink={handleDrink} isBusy={isBusy} />
+            : <Panel types={drinkTypes} prepareDrink={handleDrink} />
           }
         </Container>
       }
