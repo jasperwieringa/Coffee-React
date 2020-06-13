@@ -24,8 +24,8 @@ export default function SweetCoffee() {
   // Haal de status_code en bijbehorende meldingen op
   const handleStatus = (status_code) => {
     const status = new Status();
-    status.status_code = status_code;
-    return (status.status_code);
+    status.setStatusCode(status_code);
+    return (status.getStatusCode);
   }
 
   return (
