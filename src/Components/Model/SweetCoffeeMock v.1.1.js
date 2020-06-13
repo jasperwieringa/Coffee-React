@@ -16,8 +16,6 @@ class SweetCoffeeMachine {
 		} else {
 			return false
 		}
-
-		console.log(reqMilk, reqSugar, reqChoco);
 		
 		this.requirements = {
 			milk: reqMilk ? Number(reqMilk) : 0, 

@@ -41,7 +41,7 @@ export default function Panel(props) {
 
   // Cb functie voor de CoffeeButton
   const handleDrink = (name, baseReq) => {
-    let reqMilk = sliderValues.milk;
+    let reqMilk = sliderValues.milk;  
     const reqSugar = sliderValues.sugar;
     const reqChoco = baseReq.chocolate;
 
@@ -54,9 +54,7 @@ export default function Panel(props) {
     }
 
     // Maak het drankje
-    const isPreparing = coffeeMachine.prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, props.bugMultiplier, props.handleError);
-  
-    if (isPreparing) {
+    if (coffeeMachine.prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, props.bugMultiplier, props.handleError)) {
       setIsBusy(true); // Laat een laadscherm zien
       setBusyWith(name); // Laat Machine maakt <gekozen drank> tekst zien
 
@@ -70,7 +68,7 @@ export default function Panel(props) {
       // Laat een laadscherm zien van 4000ms (4s)
       setTimeout(() => {
         setIsBusy(false);
-      }, 400)
+      }, 4000)
     }
 
     /* Reset de waarden van de sliders */
