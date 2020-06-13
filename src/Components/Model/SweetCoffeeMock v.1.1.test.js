@@ -5,7 +5,7 @@ const handleError = () => {
 }
 
 // Test het component op een foutieve invoer
-it('return value is foutief drankje', () => {
+it('return value is false bij een foutieve invoer', () => {
 	const coffeeMachine = new SweetCoffeeMachine();
 
 	const props = {
@@ -29,11 +29,11 @@ it('return value is foutief drankje', () => {
 		props.reqChoco, 
 		props.bugMiltiplier,
 		handleError
-	)).toEqual("Foutief drankje");
+	)).toEqual(false);
 });
 
 // Test het component op een correcte invoer
-it('return value is true', () => {
+it('return value is true 1', () => {
 	const coffeeMachine = new SweetCoffeeMachine();
 
 	const props = {
@@ -61,11 +61,11 @@ it('return value is true', () => {
 });
 
 // Test het component op een lege voorraad
-it('return value is false', () => {
+it('return value is false 1', () => {
 	const coffeeMachine = new SweetCoffeeMachine();
 
 	const props = {
-		name: "AmeriCano",
+		name: "CaPPuCino",
 		stock: {
 			milk: 0,
 			sugar: 0,
@@ -89,11 +89,11 @@ it('return value is false', () => {
 });
 
 // Test het component op een foutieve typeof voorraad
-it('return value is false', () => {
+it('return value is false 2', () => {
 	const coffeeMachine = new SweetCoffeeMachine();
 
 	const props = {
-		name: "AmeriCano",
+		name: "EarL GRAY",
 		stock: "TestString",
 		reqMilk: 5,
 		reqSugar: 5,
@@ -113,11 +113,11 @@ it('return value is false', () => {
 });
 
 // Test het component op een foutieve typeof requirements
-it('return value is true', () => {
+it('return value is true 2', () => {
 	const coffeeMachine = new SweetCoffeeMachine();
 
 	const props = {
-		name: "AmeriCano",
+		name: "Chocolade",
 		stock: {
 			milk: 10,
 			sugar: 10,

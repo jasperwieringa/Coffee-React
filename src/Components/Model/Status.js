@@ -34,8 +34,11 @@ class Status {
         break;
       }
       default: {
-        this.status = null;
-        return "Onbekende fout";
+        this.status = {
+          error: true, 
+          description: "Onbekende fout", 
+          message: "Onbekende fout"
+        }
       }
     }
   }

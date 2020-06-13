@@ -14,9 +14,11 @@ it('return value is an object', () => {
 
   status.setStatusCode(3);
   expect(typeof status.getStatusCode()).toBe("object");
+});
+
+it ('return value is Onbekende fout', () => {
+  const status = new Status();
 
   status.setStatusCode(4);
-  expect(status.getStatusCode()).toBe(null);
-
-  expect(status.setStatusCode(4)).toBe("Onbekende fout");
-});
+  expect(status.getStatusCode().message).toBe("Onbekende fout");
+})

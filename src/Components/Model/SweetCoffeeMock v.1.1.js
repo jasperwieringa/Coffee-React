@@ -18,9 +18,9 @@ class SweetCoffeeMachine {
 		}
 		
 		this.requirements = {
-			milk: typeof reqMilk === "number" ? reqMilk : Number(reqMilk), 
-			sugar: typeof reqSugar === "number" ? reqSugar : Number(reqSugar), 
-			chocolate: typeof reqChoco === "number" ? reqChoco : Number(reqChoco)
+			milk: reqMilk ? Number(reqMilk) : 0, 
+			sugar: reqSugar ? Number(reqSugar) : 0, 
+			chocolate: reqChoco ? Number(reqChoco) : 0
 		}
 
 		this.isError = this.generateRandomStatus(bugMultiplier); // Genereer een willekeurige status_code
@@ -50,8 +50,17 @@ class SweetCoffeeMachine {
 				preparedDrink = "Foutief drankje";
 		}
 
-		this.isError && handleError(this.status_code)
-		return preparedDrink;
+		if (this.isError) {
+			preparedDrink = false;
+			handleError(this.status_code);
+		}
+
+		if (typeof preparedDrink !== "boolean") {
+			preparedDrink = false;
+			handleError();
+		}
+
+		return preparedDrink
 	}
 
 	makeAmericano () {

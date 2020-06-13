@@ -14,7 +14,7 @@ it('renders without crashing', () => {
 });
 
 // Test of het component niet crasht
-it('renders without crashing', () => {
+it('renders without crashing 2', () => {
   const props = {
     drinkType: 0
   }
