@@ -51,8 +51,7 @@ export default function Panel(props) {
       ? baseReq.milk + sliderValues.milk > stock.milk ? stock.milk : baseReq.milk + sliderValues.milk
       : sliderValues.milk, 
       sliderValues.sugar, 
-      baseReq.chocolate, 
-      props.handleError
+      baseReq.chocolate
     )
   
     if (!!isPrepared) {
@@ -74,7 +73,7 @@ export default function Panel(props) {
 
     setTimeout(() => {
       setIsBusy(false);
-    }, 100)
+    }, 4000)
   };
 
   // Cb functie voor de Slider

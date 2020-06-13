@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SweetCoffee from './Components/Window/SweetCoffee';
+import SweetCoffee from './Components/SweetCoffee';
 import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';

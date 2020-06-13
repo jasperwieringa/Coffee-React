@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Error from './Error';
-import Panel from './Panel';
+import Error from './Window/Error';
+import Panel from './Window/Panel';
 
 import Container from 'react-bootstrap/Container';
 
