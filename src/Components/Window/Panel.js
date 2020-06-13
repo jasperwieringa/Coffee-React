@@ -64,7 +64,7 @@ export default function Panel(props) {
 
     setTimeout(() => {
       setIsBusy(false);
-    }, 100)
+    }, 4000)
   };
 
   // Cb functie voor de Slider
@@ -81,9 +81,19 @@ export default function Panel(props) {
         <React.Fragment>
           <Row className={`mx-1 mt-3 ${styles.buttons}`}>
             {(drinkTypes).map((value, index) => {
-              return(
+              let isDisabled = false;
+
+              if (value.requirements) {
+                Object.entries(value.requirements).forEach(([key, requirement]) => {
+                  if (key in stock && stock[key] < requirement) {
+                    isDisabled = true;
+                  };
+                })
+              }
+
+              return (
                 <Col xs={4} key={index} className="mb-1">
-                  <CoffeeButton key={value.id} data={value} handleDrink={handleDrink}/>
+                  <CoffeeButton name={value.name} key={value.id} disabled={isDisabled} handleDrink={handleDrink}/>
                 </Col>
               )
             })}
@@ -92,6 +102,8 @@ export default function Panel(props) {
             {Object.keys(stock).map((value, index) => {
               if (value !== "chocolate") {
                 return (<Slider name={value} key={index} stock={stock} cbFunction={handleRequirements} />)
+              } else {
+                return false;
               }
             })}
           </Row>

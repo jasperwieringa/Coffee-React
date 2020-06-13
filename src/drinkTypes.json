@@ -4,15 +4,24 @@
 }, 
 {
   "name": "Cappucino",
-  "id": "cpc"
+  "id": "cpc",
+  "requirements": {
+    "milk": 1
+  }
 },
 {
   "name": "Wiener Melange",
-  "id": "wm"
+  "id": "wm",
+  "requirements": {
+    "chocolate": 1
+  }
 },
 {
   "name": "Chocolade",
-  "id": "cc"
+  "id": "cc",
+  "requirements": {
+    "chocolate": 1
+  }
 },
 {
   "name": "Zwarte thee",

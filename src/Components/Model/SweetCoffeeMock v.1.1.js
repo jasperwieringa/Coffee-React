@@ -3,7 +3,7 @@ class SweetCoffeeMachine {
 	  this.stock = {
 			milk: 10,
 			sugar: 10,
-			chocolate: 10,
+			chocolate: 0,
 		};
 		this.requirements = []
 	}
@@ -12,9 +12,6 @@ class SweetCoffeeMachine {
 		this.stock = stock;
 		this.requirements = {milk: reqMilk, sugar: reqSugar, chocolate: 0};
 		this.handleError = handleError;
-
-		console.log("In stock: ", this.stock);
-		console.log("Required: ", this.requirements);
 
 		switch(name.toLowerCase()) {
 			case "americano":
