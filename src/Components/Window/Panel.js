@@ -42,32 +42,34 @@ export default function Panel(props) {
     setIsBusy(true);
     setBusyWith(name);
 
-    const preparedDrink = coffeeMachine.prepareDrink(name, stock, requirements.milk, requirements.sugar, props.handleError)
+    const preparedDrink = coffeeMachine.prepareDrink(name, stock, stock.milk, requirements.sugar, props.handleError)
 
     if (!!preparedDrink) {
-      setStock(prevStock => {
-        const newSugar = (prevStock.sugar - "sugarCount");
-		    const newMilk = (prevStock.milk - "milkCount");
+      const newMilk = stock.milk - requirements.milk;
+      const newSugar = stock.sugar - requirements.sugar;
+      const newChocolate = stock.chocolate - requirements.chocolate;
 
-        return  {
-          milk: newMilk,
-          chocolate: prevStock.chocolate,
-          sugar: newSugar
-        }
+      setStock({
+        milk: newMilk,
+        sugar: newSugar,
+        chocolate: newChocolate
       });
-
-      setTimeout(() => {
-        setIsBusy(false);
-      }, 4000)
     }
+
+    /* Zet slider waarde op 0 wanneer de volledige stock is gebruikt.
+    De slider wordt disabled en behoudt daarom de laatst bekende value */
+    requirements.milk === stock.milk && handleRequirements("milk", 0);
+    requirements.sugar === stock.sugar && handleRequirements("sugar", 0);
+
+    setTimeout(() => {
+      setIsBusy(false);
+    }, 100)
   };
 
-  const handleRequirements = (event) => {
-    const {name, value} = event.target;
-
+  const handleRequirements = (name, value) => {
     setRequirements({
       ...requirements,
-      [name]: Number(value)
+      [name]: value
     })
   };
 
