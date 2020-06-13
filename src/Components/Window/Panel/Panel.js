@@ -59,8 +59,8 @@ export default function Panel(props) {
       reqMilk,
       reqSugar,
       reqChoco,
-      props.handleError,
-      props.bugMultiplier
+      props.bugMultiplier,
+      props.handleError
     )
   
     // Als het drankje klaar is..

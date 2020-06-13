@@ -17,6 +17,7 @@ export default function SweetCoffee() {
   // Handel een eventuele fout af
   const handleError = (status_code) => {
     const { error, description, message } = handleStatus(status_code);
+
     setIsError(error);
     setErrorMessage([description, message]);
   };
@@ -25,7 +26,8 @@ export default function SweetCoffee() {
   const handleStatus = (status_code) => {
     const status = new Status();
     status.setStatusCode(status_code);
-    return (status.getStatusCode);
+
+    return (status.getStatusCode());
   }
 
   return (

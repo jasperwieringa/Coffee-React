@@ -19,7 +19,7 @@ export default function Loader(props) {
       <Image className="w-100 h-100" src={alaminxyz}/>
       <Row className={`position-relative text-center ${styles.row}`}>
         <Col xs={12}>
-          <h5 className="position-relative">Machine maakt een {props.drinkType}, even geduld...</h5>
+          <h5 className="position-relative">Machine maakt een {String(props.drinkType).toLowerCase()}, even geduld...</h5>
         </Col>
       </Row>
     </React.Fragment>

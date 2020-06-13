@@ -1,9 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 import Status from './Status';
 
-// Test of het component niet crasht
 it('return value is an object', () => {
   const status = new Status();
 

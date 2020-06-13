@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-const Slider = (props) => {
+export default function Slider(props) {
   const [count, setCount] = useState(0);
 
   const handleChange = (e) => {
@@ -27,5 +27,3 @@ const Slider = (props) => {
     </Col>
   )
 }
-
-export default Slider;

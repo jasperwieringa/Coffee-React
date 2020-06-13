@@ -10,67 +10,72 @@ class SweetCoffeeMachine {
 		this.status_code = 0;
 	}
 
-	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, handleError, bugMultiplier) {
-		this.stock = stock;
-		this.requirements = {milk: reqMilk, sugar: reqSugar, chocolate: reqChoco};
+	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, bugMultiplier, handleError) {		
+		if (typeof stock === "object") {
+			this.stock = stock;
+		} else {
+			return false
+		}
+		
+		this.requirements = {
+			milk: typeof reqMilk === "number" ? reqMilk : Number(reqMilk), 
+			sugar: typeof reqSugar === "number" ? reqSugar : Number(reqSugar), 
+			chocolate: typeof reqChoco === "number" ? reqChoco : Number(reqChoco)
+		}
+
 		this.isError = this.generateRandomStatus(bugMultiplier); // Genereer een willekeurige status_code
 
-		if (!this.isError) {
-			switch(name.toLowerCase()) {
-				case "americano":
-					return this.makeAmericano()
-				case "cappucino":
-					return this.makeCappuchino()
-				case "wiener melange":
-					return this.makeWienermelange()
-				case "chocolade":
-					return this.makeChoco()
-				case "zwarte thee":
-					return this.makeTeaBlack()
-				case "earl gray":
-					return this.makeTeaEarlgray()
-				default:
-					return;
-			}
-		} else {
-			handleError(this.status_code)
+		let preparedDrink;
+
+		switch(name.toLowerCase()) {
+			case "americano":
+				preparedDrink = this.makeAmericano();
+				break;
+			case "cappucino":
+				preparedDrink = this.makeCappuchino();
+				break;
+			case "wiener melange":
+				preparedDrink = this.makeWienermelange();
+				break;
+			case "chocolade":
+				preparedDrink = this.makeChoco();
+				break;
+			case "zwarte thee":
+				preparedDrink = this.makeTeaBlack();
+				break;
+			case "earl gray":
+				preparedDrink = this.makeTeaEarlgray();
+				break;
+			default:
+				preparedDrink = "Foutief drankje";
 		}
+
+		this.isError && handleError(this.status_code)
+		return preparedDrink;
 	}
 
 	makeAmericano () {
-		if (this.checkStock()) {
-			return true;
-		}
+		return this.checkStock()
 	}
 
 	makeCappuchino() {
-		if (this.checkStock()) {
-			return true;
-		}
+		return this.checkStock()
 	}
 
 	makeWienermelange() {
-		if (this.checkStock()) {
-			return true;
-		}
+		return this.checkStock()
 	}
 
 	makeChoco() {
-		if (this.checkStock()) {
-			return true;
-		}
+		return this.checkStock()
 	}
 
 	makeTeaBlack() {
-		if (this.checkStock()) {
-			return true;
-		}
+		return this.checkStock()
 	}
 
 	makeTeaEarlgray() {
-		if (this.checkStock()) {
-			return true;
-		}
+		return this.checkStock()
 	}
 	
 	generateRandomStatus(bugMultiplier) {

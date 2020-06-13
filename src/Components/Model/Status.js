@@ -1,6 +1,4 @@
 class Status {
-  constructor() {}
-
   setStatusCode(status_code) {
     switch(status_code) {
       case 0: {
