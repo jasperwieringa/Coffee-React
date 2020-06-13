@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from 'emotion';
 
 import Container from 'react-bootstrap/Container';
@@ -17,9 +17,8 @@ export default function Panel(props) {
   const [stock, setStock] = useState(coffeeMachine.getStock());
   const [isBusy, setIsBusy] = useState(false);
   const [busyWith, setBusyWith] = useState("");
-  const [reqSugar, setReqSugar] = useState(0);
-  const [reqMilk, setReqMilk] = useState(0);
-
+  const [sugarCount, setSugarCount] = useState(0);
+  const [milkCount, setMilkCount] = useState(0);
   const sugarRef = useRef(0);
   const milkRef = useRef(0);
 
@@ -64,9 +63,7 @@ export default function Panel(props) {
 
   return (
     <Container fluid className={`position-absolute px-0 ${styles.container}`}>
-      {isBusy 
-        ? <Loader drinkType={busyWith} /> 
-        : 
+      {!isBusy ?
         <React.Fragment>
           <Row className={`mx-1 mt-3 ${styles.buttons}`}>
             {(drinkTypes).map((value, index) => {
@@ -80,14 +77,29 @@ export default function Panel(props) {
           <Row className={`mx-1 row d-flex align-content-center ${styles.sliders}`}>
             <Col xs={6}>
               <Form.Label className="float-right">Suiker [{stock.sugar}%]</Form.Label>
-              <Form.Control type="range" ref={sugarRef} value={reqSugar <= stock.sugar ? reqSugar : stock.sugar} disabled={stock.sugar === 0} onChange={(e) => setReqSugar(e.target.value)} />
+              <Form.Control 
+                type="range" 
+                ref={sugarRef} 
+                max={stock.sugar} 
+                step="10" 
+                value={sugarCount} 
+                disabled={stock.sugar === 0} 
+                onChange={e => setSugarCount(e.target.value)}/>
             </Col>
             <Col xs={6}>
               <Form.Label className="float-right">Melk [{stock.milk}%]</Form.Label>
-              <Form.Control type="range" ref={milkRef} value={reqMilk <= stock.milk ? reqMilk : stock.milk} disabled={stock.milk === 0} onChange={(e) => setReqMilk(e.target.value)} />
+              <Form.Control 
+                type="range" 
+                ref={milkRef}  
+                max={stock.milk} 
+                step="10"
+                value={milkCount}
+                disabled={stock.milk === 0} 
+                onChange={e => setMilkCount(e.target.value)}/>
             </Col>
           </Row>
-        </React.Fragment>}
+        </React.Fragment>
+        : <Loader drinkType={busyWith} /> }
     </Container>
   );
 }
