@@ -1,23 +1,34 @@
 import React, { useState } from 'react';
 
-import Error from './Window/Error';
-import Panel from './Window/Panel';
+import Error from './Window/Error/Error';
+import Panel from './Window/Panel/Panel';
 
 import Container from 'react-bootstrap/Container';
 
+import Status from './Model/Status';
+
 export default function SweetCoffee() {
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [[errorDescr, errorMsg], setErrorMessage] = useState(["", ""]);
 
-  const handleError = (error, msg) => {
+  // Handel een eventuele fout af
+  const handleError = (status_code) => {
+    const { error, description, message } = handleStatus(status_code);
     setIsError(error);
-    setErrorMessage(msg);
+    setErrorMessage([description, message]);
   };
+
+  // Haal de status_code en bijbehorende meldingen op
+  const handleStatus = (status_code) => {
+    const status = new Status();
+    status.status_code = status_code;
+    return (status.status_code);
+  }
 
   return (
     <Container fluid className="h-100 py-3 position-relative">
       {isError 
-        ? <Error handleError={handleError} error={errorMessage} /> // Laat het Error component zien bij een error
+        ? <Error handleError={handleError} errorDescr={errorDescr} errorMsg={errorMsg} /> // Laat het Error component zien bij een error
         : <Panel handleError={handleError} /> // Laat het Panel component zien bij geen error
       }
     </Container>

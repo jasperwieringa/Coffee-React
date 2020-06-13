@@ -5,13 +5,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import SweetCoffeeMachine from '../Model/SweetCoffeeMock v.1.1';
+import SweetCoffeeMachine from '../../Model/SweetCoffeeMock v.1.1';
 
 import Loader from './Loader';
-import CoffeeButton from '../Controller/CoffeeButton';
-import Slider from '../Controller/Slider';
+import CoffeeButton from '../../Controller/CoffeeButton'; 
+import Slider from '../../Controller/Slider';
 
-import drinkTypes from '../../drinkTypes.json';
+import drinkTypes from '../../../drinkTypes.json';
 
 export default function Panel(props) {
   const coffeeMachine = new SweetCoffeeMachine();
@@ -51,7 +51,8 @@ export default function Panel(props) {
       ? baseReq.milk + sliderValues.milk > stock.milk ? stock.milk : baseReq.milk + sliderValues.milk
       : sliderValues.milk, 
       sliderValues.sugar, 
-      baseReq.chocolate
+      baseReq.chocolate,
+      props.handleError
     )
   
     // Als het drankje klaar is, moet de stock worden bijgewerkt
@@ -116,7 +117,7 @@ export default function Panel(props) {
           {/* Sliders */}
           <Row className={`mx-1 row d-flex align-content-center ${styles.sliders}`}>
             {Object.keys(stock).map((value, index) => {
-              if (value !== "chocolate") {
+              if (value !== "chocolate" && value !== "water") {
                 return (
                   <Slider 
                     name={value} 

@@ -4,9 +4,9 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 export default function Error(props) {
-  function handleError() {
-    /* De callback function vanuit SweetCoffee verwacht een String met de foutmelding en een Boolean of er een fout is */
-    props.handleError(false, "Reset");
+  function resetError() {
+    const status_code = 0;
+    props.handleError(status_code);
   };
 
   return (
@@ -15,12 +15,12 @@ export default function Error(props) {
       <Card.Body className="d-flex justify-content-center align-items-center">
         <div>
           <h3>Helaas is er een technische storing:</h3>
-          <h4>{props.error}</h4>
+          <h4>{props.errorDescr}: {props.errorMsg}</h4>
           <h3>Het maken van dranken is helaas niet mogelijk.</h3>
         </div>
       </Card.Body>
       <Card.Footer className="text-muted">
-        <Button variant="primary" className="float-right" onClick={e => handleError()}>Reset</Button>
+        <Button variant="primary" className="float-right" onClick={e => resetError()}>Reset</Button>
       </Card.Footer>
     </Card>
   );
