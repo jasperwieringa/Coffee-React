@@ -17,8 +17,8 @@ export default function SweetCoffee() {
   return (
     <Container fluid className="h-100 py-3 position-relative">
       {isError 
-        ? <Error handleError={handleError} error={errorMessage} /> 
-        : <Panel handleError={handleError} />
+        ? <Error handleError={handleError} error={errorMessage} /> // Laat het Error component zien bij een error
+        : <Panel handleError={handleError} /> // Laat het Panel component zien bij geen error
       }
     </Container>
   );

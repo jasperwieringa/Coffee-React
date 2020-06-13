@@ -47,22 +47,19 @@ export default function Panel(props) {
     const isPrepared = coffeeMachine.prepareDrink(
       name, 
       stock, 
-      baseReq.milk 
+      baseReq.milk // Als er een basis hoeveelheid melk nodig is, pas dan de value aan (max 10 bij default waarden vanuit de SweetCoffeeMachine klasse)
       ? baseReq.milk + sliderValues.milk > stock.milk ? stock.milk : baseReq.milk + sliderValues.milk
       : sliderValues.milk, 
       sliderValues.sugar, 
       baseReq.chocolate
     )
   
+    // Als het drankje klaar is, moet de stock worden bijgewerkt
     if (!!isPrepared) {
-      const newMilk = stock.milk - sliderValues.milk;
-      const newSugar = stock.sugar - sliderValues.sugar;
-      const newChocolate = stock.chocolate - baseReq.chocolate;
-
       setStock({
-        milk: newMilk,
-        sugar: newSugar,
-        chocolate: newChocolate
+        milk: stock.milk - sliderValues.milk,
+        sugar: stock.sugar - sliderValues.sugar,
+        chocolate: stock.chocolate - baseReq.chocolate
       });
     }
 
@@ -86,16 +83,18 @@ export default function Panel(props) {
 
   return (
     <Container fluid className={`position-absolute px-0 ${styles.container}`}>
-      {!isBusy ?
+      {!isBusy ? // Laat de controllers zien wanneer er geen drankje wordt bereid
         <React.Fragment>
+
+          {/* Drank knoppen */}
           <Row className={`mx-1 mt-3 ${styles.buttons}`}>
             {(drinkTypes).map((value, index) => {
               let isDisabled = false;
 
-              // Kijk of het drankje benodigdheden heeft
+              /* Kijk of het drankje basisbenodigdheden heeft (zoals melk of chocolade) */
               if (value.requirements) {
                 Object.entries(value.requirements).forEach(([key, requirement]) => {
-                  // Disable een knop als de benodigde hoeveelheid kleiner is dan de voorraad
+                  /* Disable de knop als de benodigde hoeveelheid kleiner is dan de voorraad */
                   if (key in stock && stock[key] < requirement) {
                     isDisabled = true;
                   };
@@ -113,6 +112,8 @@ export default function Panel(props) {
               )
             })}
           </Row>
+          
+          {/* Sliders */}
           <Row className={`mx-1 row d-flex align-content-center ${styles.sliders}`}>
             {Object.keys(stock).map((value, index) => {
               if (value !== "chocolate") {
@@ -128,7 +129,8 @@ export default function Panel(props) {
             })}
           </Row>
         </React.Fragment>
-        : <Loader drinkType={busyWith} /> }
+        : <Loader drinkType={busyWith} /> // Laat het Loader component zien wanneer er een drankje wordt bereid
+        } 
     </Container>
   );
 }

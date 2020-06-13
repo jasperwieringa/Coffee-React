@@ -1,9 +1,9 @@
 class SweetCoffeeMachine {
 	constructor() {
 	  this.stock = {
-			milk: 10,
-			sugar: 10,
-			chocolate: 10
+			milk: 1,
+			sugar: 1,
+			chocolate: 1
 		};
 		this.requirements = []
 	}
