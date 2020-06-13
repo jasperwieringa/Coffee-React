@@ -11,6 +11,9 @@ export default function SweetCoffee() {
   const [isError, setIsError] = useState(false);
   const [[errorDescr, errorMsg], setErrorMessage] = useState(["", ""]);
 
+  // Pas deze waarde aan om de kans te vergroten/verkleinen voor een foutmelding
+  const bugMultiplier = 5;
+
   // Handel een eventuele fout af
   const handleError = (status_code) => {
     const { error, description, message } = handleStatus(status_code);
@@ -29,7 +32,7 @@ export default function SweetCoffee() {
     <Container fluid className="h-100 py-3 position-relative">
       {isError 
         ? <Error handleError={handleError} errorDescr={errorDescr} errorMsg={errorMsg} /> // Laat het Error component zien bij een error
-        : <Panel handleError={handleError} /> // Laat het Panel component zien bij geen error
+        : <Panel handleError={handleError} bugMultiplier={bugMultiplier} /> // Laat het Panel component zien bij geen error
       }
     </Container>
   );

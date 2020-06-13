@@ -41,37 +41,49 @@ export default function Panel(props) {
 
   // Cb functie voor de CoffeeButton
   const handleDrink = (name, baseReq) => {
-    setIsBusy(true);
-    setBusyWith(name);
+    let reqMilk = sliderValues.milk;
+    const reqSugar = sliderValues.sugar;
+    const reqChoco = baseReq.chocolate;
+
+    /* Als een drankje als basis ingredient melk nodig heeft, 
+    moet de hoeveelheid worden aangepast */ 
+    if (baseReq.milk) {
+      reqMilk = baseReq.milk + sliderValues.milk > stock.milk
+      ? stock.milk
+      : baseReq.milk + sliderValues.milk
+    }
 
     const isPrepared = coffeeMachine.prepareDrink(
       name, 
       stock, 
-      baseReq.milk // Als er een basis hoeveelheid melk nodig is, pas dan de value aan (max 10 bij default waarden vanuit de SweetCoffeeMachine klasse)
-      ? baseReq.milk + sliderValues.milk > stock.milk ? stock.milk : baseReq.milk + sliderValues.milk
-      : sliderValues.milk, 
-      sliderValues.sugar, 
-      baseReq.chocolate,
-      props.handleError
+      reqMilk,
+      reqSugar,
+      reqChoco,
+      props.handleError,
+      props.bugMultiplier
     )
   
-    // Als het drankje klaar is, moet de stock worden bijgewerkt
+    // Als het drankje klaar is..
     if (!!isPrepared) {
+      setIsBusy(true); // Laat een laadscherm zien
+      setBusyWith(name); // Laat Machine maakt <gekozen drank> tekst zien
+
+      // De stock moet worden bijgewerkt
       setStock({
-        milk: stock.milk - sliderValues.milk,
-        sugar: stock.sugar - sliderValues.sugar,
-        chocolate: stock.chocolate - baseReq.chocolate
+        milk: stock.milk - reqMilk,
+        sugar: stock.sugar - reqSugar,
+        chocolate: stock.chocolate - reqChoco
       });
+
+      /* Zet waarden van de sliders op 0 wanneer de volledige stock is gebruikt. */
+      reqMilk >= stock.milk && handleSliderValues("milk", 0);
+      reqSugar >= stock.sugar && handleSliderValues("sugar", 0);
+
+      // Laat een laadscherm zien van 4000ms (4s)
+      setTimeout(() => {
+        setIsBusy(false);
+      }, 4000)
     }
-
-    /* Zet waarden op 0 wanneer de volledige stock is gebruikt. */
-    sliderValues.milk >= stock.milk && handleSliderValues("milk", 0);
-    sliderValues.sugar >= stock.sugar && handleSliderValues("sugar", 0);
-    sliderValues.chocolate >= stock.chocolate && handleSliderValues("chocolate", 0);
-
-    setTimeout(() => {
-      setIsBusy(false);
-    }, 4000)
   };
 
   // Cb functie voor de Slider

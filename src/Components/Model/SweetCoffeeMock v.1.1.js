@@ -10,10 +10,10 @@ class SweetCoffeeMachine {
 		this.status_code = 0;
 	}
 
-	prepareDrink(name, stock, reqMilk, reqSugar, reqChocolate, handleError) {
+	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, handleError, bugMultiplier) {
 		this.stock = stock;
-		this.requirements = {milk: reqMilk, sugar: reqSugar, chocolate: reqChocolate};
-		this.isError = this.generateRandomStatus(); // Genereer een willekeurige status_code
+		this.requirements = {milk: reqMilk, sugar: reqSugar, chocolate: reqChoco};
+		this.isError = this.generateRandomStatus(bugMultiplier); // Genereer een willekeurige status_code
 
 		if (!this.isError) {
 			switch(name.toLowerCase()) {
@@ -73,13 +73,15 @@ class SweetCoffeeMachine {
 		}
 	}
 	
-	generateRandomStatus() {
-		const randomNumber = Math.floor(Math.random() * 5);
-		const compareNumber = Math.floor(Math.random() * 5);
+	generateRandomStatus(bugMultiplier) {
+		const reCalculatedMultiplier = bugMultiplier < 4 ? 4 : bugMultiplier
+		const randomNumber = Math.floor(Math.random() * reCalculatedMultiplier);
+		const compareNumber = Math.floor(Math.random() * reCalculatedMultiplier);
 
-		/* Vergelijk 2 willekeurige nummers tussen 0-5 om zo nu en dan 
-		een foutmelding weer te geven */
-		if (randomNumber === compareNumber && randomNumber < 4) {
+		/* Vergelijk 2 willekeurige nummers (tussen 0 en ReCalculatedMultiplier) 
+		om zo nu en dan een foutmelding weer te geven
+		Regels: 0 = success, 1 = error, 2 = error, 3 = error */ 
+		if (randomNumber === compareNumber && randomNumber > 0 && randomNumber < 4) {
 			this.status_code = randomNumber;
 			return true;			
 		} return false;
