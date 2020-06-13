@@ -15,13 +15,13 @@ import drinkTypes from '../../drinkTypes.json';
 export default function Panel(props) {
   const coffeeMachine = new SweetCoffeeMachine();
   const [stock, setStock] = useState(coffeeMachine.getStock());
-  const [isBusy, setIsBusy] = useState(false);
-  const [busyWith, setBusyWith] = useState("");
   const [requirements, setRequirements] = useState({
     milk: 0,
     sugar: 0,
     chocolate: 0
   });
+  const [isBusy, setIsBusy] = useState(false);
+  const [busyWith, setBusyWith] = useState("");
 
   const styles = {
     container: css`
@@ -38,11 +38,12 @@ export default function Panel(props) {
     `
   };
 
+  // Cb functie voor de CoffeeButton
   const handleDrink = (name) => {
     setIsBusy(true);
     setBusyWith(name);
 
-    const preparedDrink = coffeeMachine.prepareDrink(name, stock, stock.milk, requirements.sugar, props.handleError)
+    const preparedDrink = coffeeMachine.prepareDrink(name, stock, requirements.milk, requirements.sugar, props.handleError)
 
     if (!!preparedDrink) {
       const newMilk = stock.milk - requirements.milk;
@@ -66,6 +67,7 @@ export default function Panel(props) {
     }, 100)
   };
 
+  // Cb functie voor de Slider
   const handleRequirements = (name, value) => {
     setRequirements({
       ...requirements,
