@@ -24,7 +24,7 @@ class SweetCoffeeMachine {
 		}
 
 		this.isError = this.generateRandomStatus(bugMultiplier); // Genereer een willekeurige status_code
-
+		
 		let preparedDrink;
 
 		switch(name.toLowerCase()) {

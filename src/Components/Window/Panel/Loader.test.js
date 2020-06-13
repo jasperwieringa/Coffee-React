@@ -22,4 +22,3 @@ it('renders without crashing 2', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Loader drinkType={props.drinkType} />, div);
 });
-

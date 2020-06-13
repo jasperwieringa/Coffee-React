@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Slider from './Slider';
+import Panel from './Panel';
 
 // Test of het component niet crasht
 it('renders without crashing', () => {
@@ -10,14 +10,9 @@ it('renders without crashing', () => {
   }
   
   const props = {
-    name: "TestSlider",
-    stock: {
-      milk: 10,
-      sugar: 10,
-      chocolate: 10
-    }
+    bugMultiplier: "CaPpuCino"
   }
 
   const div = document.createElement('div');
-  ReactDOM.render(<Slider name={props.name} stock={props.stock} handleSliderValues={testCallback} />, div);
+  ReactDOM.render(<Panel handleError={testCallback} bugMultiplier={props.bugMultiplier} />, div);
 });

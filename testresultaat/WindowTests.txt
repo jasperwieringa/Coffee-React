@@ -1,0 +1,54 @@
+Window tests:
+
+<< Error.test.js >>
+// Test of het component niet crasht
+it('renders without crashing', () => {
+  const testCallback = () => {
+    console.log("Running testCallback");
+  }
+  
+  const props = {
+    errorDescr: "TestDescr",
+    errorMsg: "TestMessage"
+  }
+
+  const div = document.createElement('div');
+  ReactDOM.render(<Error errorDescr={props.errorDescr} errorMsg={props.errorMsg} handleError={testCallback} />, div);
+});
+// Resultaat: OK
+
+<< Loader.test.js >>
+// Test of het component niet crasht op hoofdletter gevoelige content
+it('renders without crashing', () => {
+  const props = {
+    drinkType: "CaPpuCino"
+  }
+
+  const div = document.createElement('div');
+  ReactDOM.render(<Loader drinkType={props.drinkType} />, div);
+});
+
+// Test of het component niet crasht op een invoer van een Number
+it('renders without crashing 2', () => {
+  const props = {
+    drinkType: 0
+  }
+  
+  const div = document.createElement('div');
+  ReactDOM.render(<Loader drinkType={props.drinkType} />, div);
+});
+
+<< Panel.test.js >>
+// Test of het component niet crasht
+it('renders without crashing', () => {
+  const testCallback = () => {
+    console.log("Running testCallback");
+  }
+  
+  const props = {
+    bugMultiplier: "CaPpuCino"
+  }
+
+  const div = document.createElement('div');
+  ReactDOM.render(<Panel handleError={testCallback} bugMultiplier={props.bugMultiplier} />, div);
+});
