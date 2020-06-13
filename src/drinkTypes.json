@@ -1,18 +1,27 @@
 [{
   "name": "Americano",
-  "id": "ac"
+  "id": "ac",
+  "requirements": {
+    "milk": 0,
+    "sugar": 0,
+    "chocolate": 0
+  }
 }, 
 {
   "name": "Cappucino",
   "id": "cpc",
   "requirements": {
-    "milk": 1
+    "milk": 1,
+    "sugar": 0,
+    "chocolate": 0
   }
 },
 {
   "name": "Wiener Melange",
   "id": "wm",
   "requirements": {
+    "milk": 0,
+    "sugar": 0,
     "chocolate": 1
   }
 },
@@ -20,14 +29,26 @@
   "name": "Chocolade",
   "id": "cc",
   "requirements": {
+    "milk": 0,
+    "sugar": 0,
     "chocolate": 1
   }
 },
 {
   "name": "Zwarte thee",
-  "id": "zt"
+  "id": "zt",
+  "requirements": {
+    "milk": 0,
+    "sugar": 0,
+    "chocolate": 0
+  }
 },
 {
   "name": "Earl Gray",
-  "id": "eg"
+  "id": "eg",
+  "requirements": {
+    "milk": 0,
+    "sugar": 0,
+    "chocolate": 0
+  }
 }]

@@ -3,16 +3,18 @@ class SweetCoffeeMachine {
 	  this.stock = {
 			milk: 10,
 			sugar: 10,
-			chocolate: 0,
+			chocolate: 5
 		};
 		this.requirements = []
 	}
 
-	prepareDrink(name, stock, reqMilk, reqSugar, handleError) {
+	prepareDrink(name, stock, reqMilk, reqSugar, reqChocolate, handleError) {
 		this.stock = stock;
-		this.requirements = {milk: reqMilk, sugar: reqSugar, chocolate: 0};
+		this.requirements = {milk: reqMilk, sugar: reqSugar, chocolate: reqChocolate};
 		this.handleError = handleError;
 
+		console.log(this.requirements);
+		
 		switch(name.toLowerCase()) {
 			case "americano":
 				return this.makeAmericano()

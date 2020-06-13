@@ -10,7 +10,7 @@ const Slider = (props) => {
     const value = Number(e.target.value);
     
     setCount(value);
-    props.cbFunction(props.name, value);
+    props.handleSliderValues(props.name, value);
   }
 
   return (
