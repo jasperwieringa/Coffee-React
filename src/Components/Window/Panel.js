@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 
 import SweetCoffeeMachine from '../Model/SweetCoffeeMock v.1.1';
 import Loader from './Loader';
 import CoffeeButton from '../Controller/CoffeeButton';
+import Slider from '../Controller/Slider';
 
 import drinkTypes from '../../drinkTypes.json';
 
@@ -17,10 +17,11 @@ export default function Panel(props) {
   const [stock, setStock] = useState(coffeeMachine.getStock());
   const [isBusy, setIsBusy] = useState(false);
   const [busyWith, setBusyWith] = useState("");
-  const [sugarCount, setSugarCount] = useState(0);
-  const [milkCount, setMilkCount] = useState(0);
-  const sugarRef = useRef(0);
-  const milkRef = useRef(0);
+  const [requirements, setRequirements] = useState({
+    milk: 0,
+    sugar: 0,
+    chocolate: 0
+  });
 
   const styles = {
     container: css`
@@ -35,18 +36,18 @@ export default function Panel(props) {
     sliders: css`
       height: 30%;
     `
-  }
+  };
 
   const handleDrink = (name) => {
     setIsBusy(true);
     setBusyWith(name);
 
-    const preparedDrink = coffeeMachine.prepareDrink(name, stock, sugarRef.current.value, milkRef.current.value, props.handleError)
+    const preparedDrink = coffeeMachine.prepareDrink(name, stock, requirements.milk, requirements.sugar, props.handleError)
 
     if (!!preparedDrink) {
       setStock(prevStock => {
-        const newSugar = (prevStock.sugar - sugarRef.current.value);
-		    const newMilk = (prevStock.milk - milkRef.current.value);
+        const newSugar = (prevStock.sugar - "sugarCount");
+		    const newMilk = (prevStock.milk - "milkCount");
 
         return  {
           milk: newMilk,
@@ -59,7 +60,16 @@ export default function Panel(props) {
         setIsBusy(false);
       }, 4000)
     }
-  }
+  };
+
+  const handleRequirements = (event) => {
+    const {name, value} = event.target;
+
+    setRequirements({
+      ...requirements,
+      [name]: Number(value)
+    })
+  };
 
   return (
     <Container fluid className={`position-absolute px-0 ${styles.container}`}>
@@ -75,28 +85,11 @@ export default function Panel(props) {
             })}
           </Row>
           <Row className={`mx-1 row d-flex align-content-center ${styles.sliders}`}>
-            <Col xs={6}>
-              <Form.Label className="float-right">Suiker [{stock.sugar}%]</Form.Label>
-              <Form.Control 
-                type="range" 
-                ref={sugarRef} 
-                max={stock.sugar} 
-                step="10" 
-                value={sugarCount} 
-                disabled={stock.sugar === 0} 
-                onChange={e => setSugarCount(e.target.value)}/>
-            </Col>
-            <Col xs={6}>
-              <Form.Label className="float-right">Melk [{stock.milk}%]</Form.Label>
-              <Form.Control 
-                type="range" 
-                ref={milkRef}  
-                max={stock.milk} 
-                step="10"
-                value={milkCount}
-                disabled={stock.milk === 0} 
-                onChange={e => setMilkCount(e.target.value)}/>
-            </Col>
+            {Object.keys(stock).map((value, index) => {
+              if (value !== "chocolate") {
+                return (<Slider name={value} key={index} stock={stock} cbFunction={handleRequirements} />)
+              }
+            })}
           </Row>
         </React.Fragment>
         : <Loader drinkType={busyWith} /> }

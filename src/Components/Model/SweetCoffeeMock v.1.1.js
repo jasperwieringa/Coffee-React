@@ -1,34 +1,36 @@
 class SweetCoffeeMachine {
 	constructor() {
 	  this.stock = {
-			milk: 100,
-			sugar: 100,
+			milk: 10,
+			sugar: 10,
+			chocolate: 10,
 		};
+		this.handleError = {};
 	}
 
-	prepareDrink(name, stock, reqSugar, reqMilk, handleError) {
+	prepareDrink(name, stock, reqMilk, reqSugar, handleError) {
 		this.handleError = handleError
 
 		switch(name.toLowerCase()) {
 			case "americano":
-				return this.makeAmericano(stock, reqSugar, reqMilk)
+				return this.makeAmericano(stock, reqMilk, reqSugar)
 			case "cappucino":
-				return this.makeCappuchino(stock, reqSugar, reqMilk)
+				return this.makeCappuchino(stock, reqMilk, reqSugar)
 			case "wiener melange":
-				return this.makeWienermelange(stock, reqSugar, reqMilk)
+				return this.makeWienermelange(stock, reqMilk, reqSugar)
 			case "chocolade":
-				return this.makeChoco(stock, reqSugar, reqMilk)
+				return this.makeChoco(stock, reqMilk, reqSugar)
 			case "zwarte thee":
-				return this.makeTeaBlack(stock, reqSugar, reqMilk)
+				return this.makeTeaBlack(stock, reqMilk, reqSugar)
 			case "earl gray":
-				return this.makeTeaEarlgray(stock, reqSugar, reqMilk)
+				return this.makeTeaEarlgray(stock, reqMilk, reqSugar)
 			default:
 				return;
 		}
 	}
 
-	makeAmericano (stock, reqSugar, reqMilk) {
-		if (this.checkStock(stock, reqSugar, reqMilk)) {
+	makeAmericano (stock, reqMilk, reqSugar) {
+		if (this.checkStock(stock, reqMilk, reqSugar)) {
 			return true;
 		} else {
 			this.handleError(true, "Something went wrong");
@@ -36,40 +38,40 @@ class SweetCoffeeMachine {
 		}
 	}
 
-	makeCappuchino(stock, reqSugar, reqMilk) {
-		if (this.checkStock(stock, reqSugar, reqMilk)) {
+	makeCappuchino(stock, reqMilk, reqSugar) {
+		if (this.checkStock(stock, reqMilk, reqSugar)) {
 			return true;
 		} else {
 			this.handleError(true, "Something went wrong");
 		}
 	}
 
-	makeWienermelange(stock, reqSugar, reqMilk) {
-		if (this.checkStock(stock, reqSugar, reqMilk)) {
+	makeWienermelange(stock, reqMilk, reqSugar) {
+		if (this.checkStock(stock, reqMilk, reqSugar)) {
 			return true;
 		} else {
 			this.handleError(true, "Something went wrong");
 		}
 	}
 
-	makeChoco(stock, reqSugar, reqMilk) {
-		if (this.checkStock(stock, reqSugar, reqMilk)) {
+	makeChoco(stock, reqMilk, reqSugar) {
+		if (this.checkStock(stock, reqMilk, reqSugar)) {
 			return true;
 		} else {
 			this.handleError(true, "Something went wrong");
 		}
 	}
 
-	makeTeaBlack(stock, reqSugar, reqMilk) {
-		if (this.checkStock(stock, reqSugar, reqMilk)) {
+	makeTeaBlack(stock, reqMilk, reqSugar) {
+		if (this.checkStock(stock, reqMilk, reqSugar)) {
 			return true;
 		} else {
 			this.handleError(true, "Something went wrong");
 		}
 	}
 
-	makeTeaEarlgray(stock, reqSugar, reqMilk) {
-		if (this.checkStock(stock, reqSugar, reqMilk)) {
+	makeTeaEarlgray(stock, reqMilk, reqSugar) {
+		if (this.checkStock(stock, reqMilk, reqSugar)) {
 			return true;
 		} else {
 			this.handleError(true, "Something went wrong");
@@ -81,8 +83,8 @@ class SweetCoffeeMachine {
 	}
 
 	 // checkStock returns true of false
-	checkStock = (stock, reqSugar, reqMilk) => {
-		if (reqSugar <= stock.sugar && reqMilk <= stock.milk) {
+	checkStock = (stock, reqMilk, reqSugar) => {
+		if (reqMilk <= stock.milk && reqSugar <= stock.sugar) {
 			return true;
 		} else {
 			return false;
