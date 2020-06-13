@@ -12,7 +12,7 @@ export default function SweetCoffee() {
   const [[errorDescr, errorMsg], setErrorMessage] = useState(["", ""]);
 
   // Pas deze waarde aan om de kans te vergroten/verkleinen voor een foutmelding
-  const bugMultiplier = 5;
+  const bugMultiplier = 100;
 
   // Handel een eventuele fout af
   const handleError = (status_code) => {

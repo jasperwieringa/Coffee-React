@@ -53,10 +53,10 @@ export default function Panel(props) {
       : baseReq.milk + sliderValues.milk
     }
 
-    console.log(reqMilk, reqSugar, reqChoco)
-  
     // Maak het drankje
-    if (coffeeMachine.prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, props.bugMultiplier, props.handleError)) {
+    const isPreparing = coffeeMachine.prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, props.bugMultiplier, props.handleError);
+  
+    if (isPreparing) {
       setIsBusy(true); // Laat een laadscherm zien
       setBusyWith(name); // Laat Machine maakt <gekozen drank> tekst zien
 
@@ -67,31 +67,29 @@ export default function Panel(props) {
         chocolate: stock.chocolate - reqChoco
       });
 
-      /* Zet waarden van de sliders op 0 wanneer de volledige stock is gebruikt. */
-      sliderValues.milk >= stock.milk && handleSliderValues("milk", 0);
-      sliderValues.sugar >= stock.sugar && handleSliderValues("sugar", 0);
-
       // Laat een laadscherm zien van 4000ms (4s)
       setTimeout(() => {
         setIsBusy(false);
       }, 400)
     }
+
+    /* Reset de waarden van de sliders */
+    handleSliderValues("milk", 0);
+    handleSliderValues("sugar", 0);
   };
 
   // Cb functie voor de Slider
   const handleSliderValues = (name, value) => {
-    setSliderValues({
-      ...sliderValues,
+    setSliderValues(prevValues => ({
+      ...prevValues,
       [name]: value
-    })
+    }))
   };
 
   return (
     <Container fluid className={`position-absolute px-0 ${styles.container}`}>
       {!isBusy ? // Laat de controllers zien wanneer er geen drankje wordt bereid
         <React.Fragment>
-
-          {/* Drank knoppen */}
           <Row className={`mx-1 mt-3 ${styles.buttons}`}>
             {(drinkTypes).map((value, index) => {
               let isDisabled = false;
@@ -117,8 +115,6 @@ export default function Panel(props) {
               )
             })}
           </Row>
-          
-          {/* Sliders */}
           <Row className={`mx-1 row d-flex align-content-center ${styles.sliders}`}>
             {Object.keys(stock).map((value, index) => {
               if (value !== "chocolate" && value !== "water") {
