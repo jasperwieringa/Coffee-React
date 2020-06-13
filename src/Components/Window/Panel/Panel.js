@@ -53,18 +53,10 @@ export default function Panel(props) {
       : baseReq.milk + sliderValues.milk
     }
 
-    const isPrepared = coffeeMachine.prepareDrink(
-      name, 
-      stock, 
-      reqMilk,
-      reqSugar,
-      reqChoco,
-      props.bugMultiplier,
-      props.handleError
-    )
+    console.log(reqMilk, reqSugar, reqChoco)
   
-    // Als het drankje klaar is..
-    if (!!isPrepared) {
+    // Maak het drankje
+    if (coffeeMachine.prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, props.bugMultiplier, props.handleError)) {
       setIsBusy(true); // Laat een laadscherm zien
       setBusyWith(name); // Laat Machine maakt <gekozen drank> tekst zien
 
@@ -76,13 +68,13 @@ export default function Panel(props) {
       });
 
       /* Zet waarden van de sliders op 0 wanneer de volledige stock is gebruikt. */
-      reqMilk >= stock.milk && handleSliderValues("milk", 0);
-      reqSugar >= stock.sugar && handleSliderValues("sugar", 0);
+      sliderValues.milk >= stock.milk && handleSliderValues("milk", 0);
+      sliderValues.sugar >= stock.sugar && handleSliderValues("sugar", 0);
 
       // Laat een laadscherm zien van 4000ms (4s)
       setTimeout(() => {
         setIsBusy(false);
-      }, 4000)
+      }, 400)
     }
   };
 

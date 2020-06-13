@@ -6,11 +6,14 @@ class SweetCoffeeMachine {
 			chocolate: 10
 		};
 		this.requirements = []
-		this.isError = false;
+		this.isError = false;	
 		this.status_code = 0;
 	}
 
-	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, bugMultiplier, handleError) {		
+	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, bugMultiplier, handleError) {
+		console.log(reqMilk, reqSugar, reqChoco);
+		
+
 		if (typeof stock === "object") {
 			this.stock = stock;
 		} else {
