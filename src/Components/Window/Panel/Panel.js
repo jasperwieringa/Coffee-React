@@ -16,13 +16,13 @@ import drinkTypes from '../../../drinkTypes.json';
 export default function Panel(props) {
   const coffeeMachine = new SweetCoffeeMachine();
   const [stock, setStock] = useState(coffeeMachine.getStock());
+  const [isBusy, setIsBusy] = useState(false);
+  const [busyWith, setBusyWith] = useState("");
   const [sliderValues, setSliderValues] = useState({
     milk: 0,
     sugar: 0,
     chocolate: 0
   });
-  const [isBusy, setIsBusy] = useState(false);
-  const [busyWith, setBusyWith] = useState("");
 
   const styles = {
     container: css`
@@ -39,44 +39,12 @@ export default function Panel(props) {
     `
   };
 
-  // Cb functie voor de CoffeeButton
-  const handleDrink = (name, baseReq) => {
-    let reqMilk = sliderValues.milk;  
-    const reqSugar = sliderValues.sugar;
-    const reqChoco = baseReq.chocolate;
-
-    /* Als een drankje als basis ingredient melk nodig heeft, 
-    moet de hoeveelheid worden aangepast */ 
-    if (baseReq.milk) {
-      reqMilk = baseReq.milk + sliderValues.milk > stock.milk
-      ? stock.milk
-      : baseReq.milk + sliderValues.milk
-    }
-
-    // Maak het drankje
-    if (coffeeMachine.prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, props.bugMultiplier, props.handleError)) {
-      setIsBusy(true); // Laat een laadscherm zien
-      setBusyWith(name); // Laat Machine maakt <gekozen drank> tekst zien
-
-      // De stock moet worden bijgewerkt
-      setStock({
-        milk: stock.milk - reqMilk,
-        sugar: stock.sugar - reqSugar,
-        chocolate: stock.chocolate - reqChoco
-      });
-
-      // Laat een laadscherm zien van 4000ms (4s)
-      setTimeout(() => {
-        setIsBusy(false);
-      }, 4000)
-    }
-
-    /* Reset de waarden van de sliders */
-    handleSliderValues("milk", 0);
-    handleSliderValues("sugar", 0);
+  /* Cb functie voor de stock */
+  const handleStock = (newStock) => {
+    setStock(newStock);
   };
 
-  // Cb functie voor de Slider
+  /* Cb functie voor de Slider */
   const handleSliderValues = (name, value) => {
     setSliderValues(prevValues => ({
       ...prevValues,
@@ -84,9 +52,47 @@ export default function Panel(props) {
     }))
   };
 
+  /* Cb functie voor de CoffeeButton */
+  const handleDrink = (name, baseReq) => {
+    setIsBusy(true); // Laat een laadscherm zien
+    setBusyWith(name); // Laat Machine maakt <gekozen drank> tekst zien    
+
+    /* Als een drankje als basis ingredient melk nodig heeft, 
+    moet de hoeveelheid worden bepaald */
+    let reqMilk = sliderValues.milk;  
+    if (baseReq.milk) {
+      reqMilk = baseReq.milk + sliderValues.milk > stock.milk
+      ? stock.milk
+      : baseReq.milk + sliderValues.milk
+    }
+
+    /* Maak het drankje (returned true of false) */
+    const isPrepared = coffeeMachine.prepareDrink (
+      name, // Naam van het drankje
+      stock, // De huidige stock
+      reqMilk, // Benodigde hoeveelheid melk
+      sliderValues.sugar, // Benodigde hoeveelheid suiker
+      baseReq.chocolate,  // Benodigde hoeveelheid chocolade
+      props.bugMultiplier, // De multiplier voor het genereren van fouten
+      props.handleError, // De cb functie vanuit de SweetCoffee.js
+      handleStock // De cb functie voor het aanpassen van de stock
+    )
+
+    /* Zet de loader uit */
+    if (isPrepared) {
+      setTimeout(() => {
+        setIsBusy(false);
+      }, 4000)
+    }
+
+    /* Reset altijd de waarden van de sliders */
+    handleSliderValues("milk", 0);
+    handleSliderValues("sugar", 0);
+  };
+
   return (
     <Container fluid className={`position-absolute px-0 ${styles.container}`}>
-      {!isBusy ? // Laat de controllers zien wanneer er geen drankje wordt bereid
+      {!isBusy ?
         <React.Fragment>
           <Row className={`mx-1 mt-3 ${styles.buttons}`}>
             {(drinkTypes).map((value, index) => {
@@ -95,7 +101,7 @@ export default function Panel(props) {
               /* Kijk of het drankje basisbenodigdheden heeft (zoals melk of chocolade) */
               if (value.requirements) {
                 Object.entries(value.requirements).forEach(([key, requirement]) => {
-                  /* Disable de knop als de benodigde hoeveelheid kleiner is dan de voorraad */
+                  /* Disable de knop als de benodigde hoeveelheid niet op voorraad is */
                   if (key in stock && stock[key] < requirement) {
                     isDisabled = true;
                   };
@@ -128,7 +134,7 @@ export default function Panel(props) {
             })}
           </Row>
         </React.Fragment>
-        : <Loader drinkType={busyWith} /> // Laat het Loader component zien wanneer er een drankje wordt bereid
+        : <Loader drinkType={busyWith} />
         } 
     </Container>
   );

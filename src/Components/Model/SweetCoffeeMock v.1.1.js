@@ -10,20 +10,23 @@ class SweetCoffeeMachine {
 		this.status_code = 0;
 	}
 
-	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, bugMultiplier, handleError) {	
+	prepareDrink(name, stock, reqMilk, reqSugar, reqChoco, bugMultiplier, handleError, handleStock) {		
+		/* Overschrijf de huidige stock */
 		if (typeof stock === "object") {
 			this.stock = stock;
 		} else {
 			return false
 		}
 		
+		/* Controleer of de binnenkomende requirements wel van het Number type zijn */
 		this.requirements = {
 			milk: reqMilk ? Number(reqMilk) : 0, 
 			sugar: reqSugar ? Number(reqSugar) : 0, 
 			chocolate: reqChoco ? Number(reqChoco) : 0
 		}
 
-		this.isError = this.generateRandomStatus(bugMultiplier); // Genereer een willekeurige status_code
+		/* Genereer een willekeurige status_code */
+		this.isError = this.generateRandomStatus(bugMultiplier);
 		
 		let preparedDrink;
 
@@ -50,15 +53,26 @@ class SweetCoffeeMachine {
 				preparedDrink = "Foutief drankje";
 		}
 
+		/* Als de random status_code een fout teruggeeft (0-4) */
 		if (this.isError) {
 			preparedDrink = false;
 			handleError(this.status_code);
 		}
 
+		/* Als de preparedDrink geen true of false is, geef error */
 		if (typeof preparedDrink !== "boolean") {
 			preparedDrink = false;
 			handleError();
 		}
+
+		/* Bij success, moet de stock worden bijgewerkt */
+		handleStock(
+			{
+				milk: this.stock.milk - reqMilk,
+				sugar: this.stock.sugar - reqSugar,
+				chocolate: this.stock.chocolate - reqChoco
+			}
+		)
 
 		return preparedDrink
 	}

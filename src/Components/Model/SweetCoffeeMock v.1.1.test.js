@@ -1,7 +1,11 @@
 import SweetCoffeeMachine from './SweetCoffeeMock v.1.1';
 
 const handleError = () => {
-	console.log("Error")
+	console.log("handleError")
+}
+
+const handleStock = () => {
+	console.log("handleStock")
 }
 
 // Test het component op een foutieve invoer
@@ -28,7 +32,8 @@ it('return value is false bij een foutieve invoer', () => {
 		props.reqSugar, 
 		props.reqChoco, 
 		props.bugMiltiplier,
-		handleError
+		handleError,
+		handleStock
 	)).toEqual(false);
 });
 
@@ -56,7 +61,8 @@ it('return value is boolean', () => {
 		props.reqSugar, 
 		props.reqChoco, 
 		props.bugMiltiplier,
-		handleError
+		handleError,
+		handleStock
 	)).toEqual("boolean");
 });
 
@@ -84,7 +90,8 @@ it('return value is false 1', () => {
 		props.reqSugar, 
 		props.reqChoco, 
 		props.bugMiltiplier,
-		handleError
+		handleError,
+		handleStock
 	)).toEqual(false);
 });
 
@@ -108,7 +115,8 @@ it('return value is false 2', () => {
 		props.reqSugar, 
 		props.reqChoco, 
 		props.bugMiltiplier,
-		handleError
+		handleError,
+		handleStock
 	)).toEqual(false);
 });
 
@@ -136,6 +144,7 @@ it('return value is een boolean', () => {
 		props.reqSugar, 
 		props.reqChoco, 
 		props.bugMiltiplier,
-		handleError
+		handleError,
+		handleStock
 	)).toEqual("boolean");
 });
