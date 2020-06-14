@@ -24,12 +24,8 @@ class SweetCoffeeMachine {
 			sugar: reqSugar ? Number(reqSugar) : 0, 
 			chocolate: reqChoco ? Number(reqChoco) : 0
 		}
-
-		/* Genereer een willekeurige status_code */
-		this.isError = this.generateRandomStatus(bugMultiplier);
 		
 		let preparedDrink;
-
 		switch(name.toLowerCase()) {
 			case "americano":
 				preparedDrink = this.makeAmericano();
@@ -52,6 +48,9 @@ class SweetCoffeeMachine {
 			default:
 				preparedDrink = "Foutief drankje";
 		}
+
+		/* Genereer een willekeurige status_code */
+		this.isError = this.generateRandomStatus(bugMultiplier);
 
 		/* Als de random status_code een fout teruggeeft (0-4) */
 		if (this.isError) {
