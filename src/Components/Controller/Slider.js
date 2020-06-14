@@ -25,11 +25,7 @@ export default function Slider(props) {
   return (
     <Col xs={6}>
       <Form.Label className="float-right">{props.name} [{props.stock[props.name]*10}%]</Form.Label>
-      <OverlayTrigger
-        placement="top"
-        delay={{ show: 10, hide: 200 }}
-        overlay={renderTooltip}
-      >
+      <OverlayTrigger placement="top" delay={{ show: 10, hide: 200 }} overlay={renderTooltip}>
         <Form.Control
           name={props.name}
           value={count} 
@@ -37,7 +33,8 @@ export default function Slider(props) {
           max={props.stock[props.name]} 
           step="1" 
           disabled={props.stock[props.name] === 0} 
-          onChange={e => handleChange(e)}/>
+          onChange={e => handleChange(e)}
+        />
       </OverlayTrigger>
     </Col>
   )
