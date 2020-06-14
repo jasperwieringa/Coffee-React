@@ -1,11 +1,11 @@
 import React from 'react';
+
 import { css } from 'emotion';
-
-import alaminxyz from '../../../images/alaminxyz.gif';
-
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
+
+import alaminxyz from '../../../images/alaminxyz.gif';
 
 export default function Loader(props) {
   const styles = {

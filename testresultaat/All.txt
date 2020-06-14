@@ -1,0 +1,13 @@
+ PASS  src/Components/Model/SweetCoffeeMock v.1.1.test.js
+ PASS  src/Components/Window/Error/Error.test.js
+ PASS  src/Components/Model/Status.test.js
+ PASS  src/Components/Controller/CoffeeButton.test.js
+ PASS  src/Components/Window/Panel/Loader.test.js
+ PASS  src/Components/Controller/Slider.test.js
+ PASS  src/Components/Window/Panel/Panel.test.js
+
+Test Suites: 7 passed, 7 total
+Tests:       16 passed, 16 total
+Snapshots:   0 total
+Time:        2.847s
+Ran all test suites.
